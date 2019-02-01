@@ -18,9 +18,7 @@ Setting up Ansible in Windows 10 machine with Vagrant
     set VAGRANT_HTTP_PROXY=%HTTP_PROXY%
 ```
 
-## Setting up Anisble Master and Slaves
-
-#### Run the above Commands if you are behind proxy
+## Setting up Anisble Master
 
 * Go to inside ansible-master-centos folder and run *vagrant up*
 * Login into master machine by running *vagrant ssh* and run the below commands to install ansible
@@ -30,7 +28,7 @@ Setting up Ansible in Windows 10 machine with Vagrant
     sudo yum install ansible -y
 ```
 
-#### Setting up Ansible Slave1 - CentOS7 & Ansible Slave2 - Ubuntu
+## Setting up Ansible Slaves
 
 * Go to inside ansible-slave1-centos folder and run *vagrant up*
 * Go to inside ansible-slave2-ubuntu folder and run *vagrant up*
@@ -42,7 +40,7 @@ Setting up Ansible in Windows 10 machine with Vagrant
     sudo systemctl restart sshd
 ```
 
-#### SSH keys configuration
+## SSH keys configuration
 
 * Go to inside "ansible-master-ubuntu" machine and run the below commands
         
@@ -51,3 +49,10 @@ Setting up Ansible in Windows 10 machine with Vagrant
     ssh-copy-id -i ~/.ssh/id_rsa vagrant@192.168.33.11
     ssh-copy-id -i ~/.ssh/id_rsa vagrant@192.168.33.12
 ``` 
+## Ansible Playbook Execution
+
+* Run the below command in master machine to make sure that ansible master connected to slaves
+
+```bash
+    ansible all -i hosts -u vagrant -m ping
+```
