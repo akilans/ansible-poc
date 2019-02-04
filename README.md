@@ -49,10 +49,44 @@ Setting up Ansible in Windows 10 machine with Vagrant
     ssh-copy-id -i ~/.ssh/id_rsa vagrant@192.168.33.11
     ssh-copy-id -i ~/.ssh/id_rsa vagrant@192.168.33.12
 ``` 
-## Ansible Playbook Execution
 
-* Run the below command in master machine to make sure that ansible master connected to slaves
+## Ansible check setup
+
+* Run the below commands [ ad-hoc commands] in master machine to make sure that ansible master connected to slaves
+
+```bash
+ansible all -i hosts -u vagrant -m ping
+```
+
+## Adhoc commands 
+
+* Inventory file is a group of all hosts which controled by ansible. It can be grouped together and we can define parameters and env vars
+
+* where *ping* , *command* and *setup* are called as modules
+
+* We can use 
 
 ```bash
     ansible all -i hosts -u vagrant -m ping
+    ansible all -i hosts -u vagrant -m command -a "uptime" # -a is argument
+    ansible all -i hosts -u vagrant -m setup # Collecting facts from client machines
+```
+
+* Instead of passing "-u vagrant" as user name everytime we can define in hosts file.
+
+```yaml
+[all:vars]
+ansible_user=vagrant
+```
+
+#### Adhoc commands to install/uninstall packages
+
+```bash
+    # Install packages using ad-hoc commands. It is recommened when all the servers should be having particular package and one time installation
+    ansible centos-webserver -i hosts -m yum -a "name=wget state=present" -b # -b - Become root user
+    ansible ubuntu-webserver -i hosts -m apt -a "name=wget state=present" -b # -b - Become root user
+
+    # Unistall packages using ad-hoc commands. It is recommened when all the servers should be having particular package and one time uninstallation
+    ansible centos-webserver -i hosts -m yum -a "name=wget state=absent" -b # -b - Become root user
+    ansible ubuntu-webserver -i hosts -m apt -a "name=wget state=absent" -b # -b - Become root user
 ```

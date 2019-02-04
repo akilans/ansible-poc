@@ -1,4 +1,8 @@
 [centos-webserver]
 192.168.33.11
+
 [ubuntu-webserver]
 192.168.33.12 ansible_python_interpreter=/usr/bin/python3
+
+[all:vars]
+ansible_user=vagrant
