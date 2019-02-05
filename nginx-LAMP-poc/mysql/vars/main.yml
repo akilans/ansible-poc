@@ -2,8 +2,8 @@
 # vars file for mysql
 mysql_pkgs:
   - mysql-server
-  - mysql-client
-  - mysql-python
+  - mysql
+  - MySQL-python
 
 mysql_root_password : akilan
 

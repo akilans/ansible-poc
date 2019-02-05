@@ -7,6 +7,7 @@
 
 - name: Install MySQL Community Repo
   command: /usr/bin/rpm -ivh /tmp/mysql80-community-release-el7-2.noarch.rpm
+  ignore_errors: yes
 
 - name : Install mysql server
   yum : name={{item}} state=present
