@@ -1,2 +1,5 @@
 ---
 # vars file for php
+php_pkgs :
+ - php
+ - php-mysql

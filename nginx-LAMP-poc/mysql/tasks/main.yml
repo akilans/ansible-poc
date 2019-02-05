@@ -1,2 +1,25 @@
 ---
 # tasks file for mysql
+- name : Install mysql server
+  yum : name={{item}} state=present
+  with_items : "{{mysql_pkgs}}"
+
+- name : Add root user for mysql
+  mysql_user : name=root password={{mysql_root_password}} host={{item}} check_implicit_admin=yes
+  with_items : "{{mysql_hosts}}"
+  
+# mysql_db uses credentials from this file to connect to DB
+- name : copy my.conf.j2 file to target machine ~/my.conf
+  template : src=my.cnf.j2 dest=/root/.my.cnf owner=root mode=0600
+
+- name : Start mysql service
+  service : name=mysql state=started enabled=true
+
+- name : Copy the initial SQL scripts
+  copy : src=sql-files/initial.sql dest=/tmp/initial.sql
+
+- name : Create DB & execute sql on the created DB
+  mysql_db : name=TUTORIALS state=present
+
+- name : Execute sql on the created DB
+  mysql_db : name=TUTORIALS state=import target=/tmp/initial.sql

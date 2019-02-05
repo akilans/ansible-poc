@@ -1,2 +1,10 @@
 ---
 # tasks file for php
+- name : Install php
+  apt : name={{item}} state=present
+  with_items : "{{php_pkgs}}" # Installing necessary php packeages
+  
+- name : Copy file to apache server
+  copy : src=php-app/ dest=/var/www/html/lamp/ directory_mode=yes
+  notify :
+   - restart httpd

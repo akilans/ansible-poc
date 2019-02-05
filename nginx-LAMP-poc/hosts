@@ -1,0 +1,8 @@
+[centos-lamp-server]
+192.168.33.11
+
+[ubuntu-nginx-server]
+192.168.33.12 ansible_python_interpreter=/usr/bin/python3
+
+[all:vars]
+ansible_user=vagrant
