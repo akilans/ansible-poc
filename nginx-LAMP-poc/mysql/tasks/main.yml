@@ -18,6 +18,12 @@
 - name : Start mysql service
   service : name=mysqld state=started enabled=true
 
+- name: Copy password to file
+  command: bash -c "grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'"
+  register: temp_pass 
+  changed_when: False
+  local_action: copy content: '[client]\n user=root \n password={{temp_pass}}' dest=/root/.my.cnf 
+
 - name : Copy the initial SQL scripts
   copy : src=sql-files/initial.sql dest=/tmp/initial.sql
 
