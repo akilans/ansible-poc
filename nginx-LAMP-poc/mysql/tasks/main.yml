@@ -1,12 +1,11 @@
 ---
 # Task file for mysql
-
-– name: Download MySQL Community Repo
+- name: Download MySQL Community Repo
   get_url:
     url: https://dev.mysql.com/get/mysql80-community-release-el7-2.noarch.rpm
     dest: /tmp
 
-– name: Install MySQL Community Repo
+- name: Install MySQL Community Repo
   command: /usr/bin/rpm -ivh /tmp/mysql80-community-release-el7-2.noarch.rpm
 
 - name : Install mysql server
