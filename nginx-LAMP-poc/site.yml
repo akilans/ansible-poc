@@ -7,7 +7,6 @@
   roles:
   - apache
   - php
-  - mysql
   
 - name: Install Nginx
   hosts: ubuntu-nginx-server

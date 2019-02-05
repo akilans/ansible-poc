@@ -1,0 +1,11 @@
+upstream site {
+  server 192.168.33.11;
+}
+
+server {
+  listen 80;
+
+  location / {
+    proxy_pass http://site;
+  }
+}

@@ -5,3 +5,19 @@
 
 - name: Install nginx
   service: name=nginx state=started enabled=true
+
+- name: remove default config files
+  file:
+    state: absent
+    path: /etc/nginx/sites-enabled/default
+
+- name: remove default config files
+  file:
+    state: absent
+    path: /etc/nginx/sites-available/default
+
+- name: Copy nginx config file
+  template:
+      dest: /etc/nginx/conf.d/default.conf
+      src: default.conf.j2
+  notify: restart nginx
