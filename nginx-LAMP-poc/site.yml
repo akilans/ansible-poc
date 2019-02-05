@@ -1,5 +1,5 @@
 ---
-- name: Install LAMP stack [Linux-Apache-mySQL-PHP]
+- name: Install LAMP stack [Linux-Apache-MySQL-PHP]
   hosts: centos-lamp-server
   remote_user: vagrant
   become: yes
@@ -8,9 +8,9 @@
   - apache
   - php
   - mysql
-
+  
 - name: Install Nginx
-  hosts: buntu-nginx-server
+  hosts: ubuntu-nginx-server
   remote_user: vagrant
   become: yes
 
